@@ -4,16 +4,16 @@ import { todoService } from 'app/services/FakeTodoService';
 import { Todo } from './Todo';
 
 
-interface State {
+type State = {
   editableTodoId: string | null;
   hasError: boolean;
   isPending: boolean;
   lowerCaseTodoFilterText: string;
   shouldShowUndoneTodosOnly: boolean;
   todos: Todo[];
-}
+};
 
-interface Actions {
+type Actions = {
   addTodo: (title: string) => Promise<void>;
   clearError: () => void;
   editTodo: (id: string) => (newTitle: string) => void;
@@ -23,7 +23,7 @@ interface Actions {
   setTodoFilter: (text: string) => void;
   toggleShouldShowUndoneTodosOnly: () => void;
   toggleTodoDone: (id: string) => void;
-}
+};
 
 export type TodosStore = State & { actions: Actions };
 
