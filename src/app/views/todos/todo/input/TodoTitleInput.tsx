@@ -1,26 +1,23 @@
 import { KeyboardEvent, useState } from 'react';
 import { TextInput } from 'app/common/components/inputs/TextInput';
-import { useTodosStore } from 'app/models/todos/todosStore';
 import classes from './TodoTitleInput.module.scss';
 
+
 type Props = {
-  readonly id: string;
+  readonly editTodo: (newTitle: string) => void;
   readonly title: string;
 };
 
-export const TodoTitleInput = ({ id, title }: Props) => {
-  const { editTodo, setEditableTodo } = useTodosStore((store) => store.actions);
+export const TodoTitleInput = ({ editTodo, title }: Props) => {
   const [editedTodoTitle, setEditedTodoTitle] = useState(title);
 
   const updateTodo = () => {
-    editTodo(id, editedTodoTitle);
-    setEditableTodo(null);
+    editTodo(editedTodoTitle);
   };
 
   const handleInputKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setEditableTodo(null);
-      setEditedTodoTitle(title);
+      editTodo(title);
     } else if (event.key === 'Enter') {
       updateTodo();
     }

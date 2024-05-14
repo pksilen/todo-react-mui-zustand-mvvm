@@ -20,7 +20,7 @@ export default function App() {
         <Header />
         <Controls />
         <ErrorBoundary>
-          {viewType == 'list' ? <TodosList /> : <TodosTable />}
+          {viewType === 'list' ? <TodosList /> : <TodosTable />}
           <AddTodo />
         </ErrorBoundary>
       </ThemeProvider>

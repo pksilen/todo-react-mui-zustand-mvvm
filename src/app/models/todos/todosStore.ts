@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { todoService } from 'app/services/FakeTodoService';
 import { Todo } from './Todo';
 
+
 interface State {
   editableTodoId: string | null;
   hasError: boolean;
@@ -15,7 +16,7 @@ interface State {
 interface Actions {
   addTodo: (title: string) => Promise<void>;
   clearError: () => void;
-  editTodo: (id: string, newTitle: string) => void;
+  editTodo: (id: string) => (newTitle: string) => void;
   fetchTodos: () => void;
   removeTodo: (id: string) => void;
   setEditableTodo: (id: string | null) => void;
@@ -43,8 +44,9 @@ export const useTodosStore = create<TodosStore>()((setState, getState) => ({
 
     clearError: () => setState({ hasError: false }),
 
-    editTodo: (id: string, newTitle: string) =>
+    editTodo: (id: string) => (newTitle: string) =>
       setState({
+        editableTodoId: null,
         todos: getState().todos.map((todo) =>
           todo.id === id ? { ...todo, title: newTitle } : todo
         )

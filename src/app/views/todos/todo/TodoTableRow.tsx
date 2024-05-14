@@ -4,19 +4,18 @@ import { Checkbox } from 'app/common/components/inputs/Checkbox';
 import { TableCell } from 'app/common/components/table/TableCell';
 import { TableRow } from 'app/common/components/table/TableRow';
 import { Todo } from 'app/models/todos/Todo';
-import { useTodosStore } from 'app/models/todos/todosStore';
 import { EditIcon, RemoveIcon } from '../../../common/components/icons/Icons';
 import classes from './TodoTableRow.module.scss';
 import { TodoTitleInput } from './input/TodoTitleInput';
+import { useTodoViewModel } from './model/useTodoViewModel';
+
 
 type Props = {
   readonly todo: Todo;
 };
 
 export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
-  const editableTodoId = useTodosStore((store) => store.editableTodoId);
-  const { removeTodo, setEditableTodo, toggleTodoDone } = useTodosStore((store) => store.actions);
-  const isEditableTodo = editableTodoId === id;
+  const vm = useTodoViewModel();
 
   const titleClasses = classNames(classes.title, {
     [classes.isDone]: isDone
@@ -25,20 +24,20 @@ export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
   return (
     <TableRow>
       <TableCell>
-        <Checkbox isChecked={isDone} color="success" onChange={() => toggleTodoDone(id)} />
+        <Checkbox isChecked={isDone} color="success" onChange={() => vm.toggleTodoDone(id)} />
       </TableCell>
-      {isEditableTodo ? (
+      {vm.editableTodoId === id ? (
         <TableCell>
-          <TodoTitleInput id={id} title={title} />
+          <TodoTitleInput editTodo={vm.editTodo(id)} title={title} />
         </TableCell>
       ) : (
-        <TableCell className={titleClasses} onDoubleClick={() => setEditableTodo(id)}>
+        <TableCell className={titleClasses} onDoubleClick={() => vm.setEditableTodo(id)}>
           {title}
         </TableCell>
       )}
       <TableCell className={classes.buttons}>
-        <IconButton icon={<EditIcon />} onClick={() => setEditableTodo(id)} />
-        <IconButton icon={<RemoveIcon />} onClick={() => removeTodo(id)} />
+        <IconButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} />
+        <IconButton icon={<RemoveIcon />} onClick={() => vm.removeTodo(id)} />
       </TableCell>
     </TableRow>
   );

@@ -1,24 +1,21 @@
 import classNames from 'classnames';
-import { TodoIcon } from 'app/common/components/icons/Icons';
+import { CheckIcon, EditIcon, RemoveIcon, TodoIcon } from 'app/common/components/icons/Icons';
 import { ListItem } from 'app/common/components/list/ListItem';
 import { ListItemIcon } from 'app/common/components/list/ListItemIcon';
 import { ListItemText } from 'app/common/components/list/ListItemText';
 import { Todo } from 'app/models/todos/Todo';
-import { useTodosStore } from 'app/models/todos/todosStore';
 import classes from './TodoListItem.module.scss';
-import { EditTodoButton } from './buttons/EditTodoButton';
-import { RemoveTodoButton } from './buttons/RemoveTodoButton';
-import { ToggleTodoDoneButton } from './buttons/ToggleTodoDoneButton';
+import { TodoButton } from './button/TodoButton';
 import { TodoTitleInput } from './input/TodoTitleInput';
+import { useTodoViewModel } from './model/useTodoViewModel';
+
 
 type Props = {
   readonly todo: Todo;
 };
 
 export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
-  const editableTodoId = useTodosStore((store) => store.editableTodoId);
-  const { setEditableTodo } = useTodosStore((store) => store.actions);
-  const isEditableTodo = editableTodoId === id;
+  const vm = useTodoViewModel();
 
   const titleClasses = classNames(classes.title, {
     [classes.isDone]: isDone
@@ -27,19 +24,23 @@ export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
   return (
     <ListItem className={classes.todo}>
       <ListItemIcon icon={<TodoIcon color={isDone ? 'success' : 'error'} />} />
-      {isEditableTodo ? (
-        <TodoTitleInput id={id} title={title} />
+      {vm.editableTodoId === id ? (
+        <TodoTitleInput editTodo={vm.editTodo(id)} title={title} />
       ) : (
         <ListItemText
           className={titleClasses}
-          onDoubleClick={() => setEditableTodo(id)}
+          onDoubleClick={() => vm.setEditableTodo(id)}
           text={title}
         />
       )}
       <div className={classes.buttons}>
-        <ToggleTodoDoneButton id={id} isDone={isDone} />
-        <EditTodoButton id={id} />
-        <RemoveTodoButton id={id} />
+        <TodoButton
+          icon={<CheckIcon />}
+          onClick={() => vm.toggleTodoDone(id)}
+          text={isDone ? 'Mark undone' : 'Mark done'}
+        />
+        <TodoButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} text="Edit" />;
+        <TodoButton icon={<RemoveIcon />} onClick={() => vm.removeTodo(id)} text="Remove" />
       </div>
     </ListItem>
   );
