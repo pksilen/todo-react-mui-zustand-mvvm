@@ -39,7 +39,7 @@ export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
           onClick={() => vm.toggleTodoDone(id)}
           text={isDone ? 'Mark undone' : 'Mark done'}
         />
-        <TodoButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} text="Edit" />;
+        <TodoButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} text="Edit" />
         <TodoButton icon={<RemoveIcon />} onClick={() => vm.removeTodo(id)} text="Remove" />
       </div>
     </ListItem>
