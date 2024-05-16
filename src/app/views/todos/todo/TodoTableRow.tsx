@@ -9,7 +9,6 @@ import { EditTextInput } from '../../../common/components/inputs/EditTextInput';
 import classes from './TodoTableRow.module.scss';
 import { useTodoViewModel } from './model/useTodoViewModel';
 
-
 type Props = {
   readonly todo: Todo;
 };
@@ -21,7 +20,12 @@ export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
   return (
     <TableRow>
       <TableCell>
-        <Checkbox isChecked={isDone} color="success" onChange={() => vm.toggleTodoDone(id)} />
+        <Checkbox
+          aria-label={title}
+          isChecked={isDone}
+          color="success"
+          onChange={() => vm.toggleTodoDone(id)}
+        />
       </TableCell>
       {vm.editableTodoId === id ? (
         <TableCell>

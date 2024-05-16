@@ -9,7 +9,6 @@ import { EditTextInput } from '../../../common/components/inputs/EditTextInput';
 import classes from './TodoListItem.module.scss';
 import { useTodoViewModel } from './model/useTodoViewModel';
 
-
 type Props = {
   readonly todo: Todo;
 };
@@ -22,7 +21,7 @@ export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
     <ListItem className={classes.todo}>
       <ListItemIcon icon={<TodoIcon color={isDone ? 'success' : 'error'} />} />
       {vm.editableTodoId === id ? (
-        <EditTextInput onEditComplete={vm.editTodo(id)} text={title} />
+        <EditTextInput aria-label="Edit todo" onEditComplete={vm.editTodo(id)} text={title} />
       ) : (
         <ListItemText
           className={titleClasses}
