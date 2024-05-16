@@ -1,5 +1,5 @@
-import { getUndoneTodoCount } from '../../../models/todos/todoSelectors';
-import { useTodosStore } from '../../../models/todos/todosStore';
+import { getUndoneTodoCount } from 'app/models/todos/todoSelectors';
+import { useTodosStore } from 'app/models/todos/todosStore';
 
 export const useHeaderViewModel = () => {
   const undoneTodoCount = useTodosStore((store) => getUndoneTodoCount(store));

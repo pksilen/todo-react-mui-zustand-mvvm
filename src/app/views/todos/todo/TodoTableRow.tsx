@@ -4,8 +4,8 @@ import { Checkbox } from 'app/common/components/inputs/Checkbox';
 import { TableCell } from 'app/common/components/table/TableCell';
 import { TableRow } from 'app/common/components/table/TableRow';
 import { Todo } from 'app/models/todos/Todo';
-import { EditIcon, RemoveIcon } from '../../../common/components/icons/Icons';
-import { EditTextInput } from '../../../common/components/inputs/EditTextInput';
+import { EditIcon, RemoveIcon } from 'app/common/components/icons/Icons';
+import { EditTextInput } from 'app/common/components/inputs/EditTextInput';
 import classes from './TodoTableRow.module.scss';
 import { useTodoViewModel } from './model/useTodoViewModel';
 

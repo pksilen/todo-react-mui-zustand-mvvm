@@ -1,5 +1,5 @@
-import {useTodosStore} from "../../../models/todos/todosStore";
-import {useControlsStore} from "../../../models/controls/controlsStore";
+import {useTodosStore} from "app/models/todos/todosStore";
+import {useControlsStore} from "app/models/controls/controlsStore";
 
 export const useControlsViewModel = () => {
     const { toggleShouldShowUndoneTodosOnly } = useTodosStore((store) => store.actions);

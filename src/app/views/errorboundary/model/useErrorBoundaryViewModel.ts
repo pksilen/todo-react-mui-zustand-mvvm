@@ -1,4 +1,4 @@
-import { useTodosStore } from '../../../models/todos/todosStore';
+import { useTodosStore } from 'app/models/todos/todosStore';
 
 export const useErrorBoundaryViewModel = () => {
   const hasError = useTodosStore((store) => store.hasError);

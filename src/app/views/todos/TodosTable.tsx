@@ -1,8 +1,8 @@
 import React from 'react';
+import { Pending } from 'app/common/components/Pending';
+import { Table } from 'app/common/components/table/Table';
 import { Heading4 } from 'app/common/components/typography/Heading4';
 import { Todo } from 'app/models/todos/Todo';
-import { Pending } from '../../common/components/Pending';
-import { Table } from '../../common/components/table/Table';
 import classes from './Todos.module.scss';
 import { useTodosViewModel } from './model/useTodosViewModel';
 import { TodoTableRow } from './todo/TodoTableRow';
