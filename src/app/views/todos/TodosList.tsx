@@ -7,17 +7,16 @@ import classes from './Todos.module.scss';
 import { useTodosViewModel } from './model/useTodosViewModel';
 import { TodoListItem } from './todo/TodoListItem';
 
-
 export const TodosList = () => {
-  const { isPending, shownTodos } = useTodosViewModel();
+  const vm = useTodosViewModel();
 
   return (
     <Pending
       className={classes.todos}
-      fallback={isPending && <Heading4>Loading todos...</Heading4>}
+      fallback={vm.isPending && <Heading4>Loading todos...</Heading4>}
     >
       <List>
-        {shownTodos.map((todo: Todo) => (
+        {vm.shownTodos.map((todo: Todo) => (
           <TodoListItem key={todo.id} todo={todo} />
         ))}
       </List>
