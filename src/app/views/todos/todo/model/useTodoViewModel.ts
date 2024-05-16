@@ -2,15 +2,15 @@ import { useTodosStore } from '../../../../models/todos/todosStore';
 
 export const useTodoViewModel = () => {
   const editableTodoId = useTodosStore((store) => store.editableTodoId);
-  const { editTodo, setEditableTodo, toggleTodoDone, removeTodo } = useTodosStore(
+  const { editTodo, removeTodo, setEditableTodo, toggleTodoDone } = useTodosStore(
     (store) => store.actions
   );
 
   return {
     editableTodoId,
     editTodo,
+    removeTodo,
     setEditableTodo,
-    toggleTodoDone,
-    removeTodo
+    toggleTodoDone
   };
 };
