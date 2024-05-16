@@ -5,8 +5,8 @@ import { TableCell } from 'app/common/components/table/TableCell';
 import { TableRow } from 'app/common/components/table/TableRow';
 import { Todo } from 'app/models/todos/Todo';
 import { EditIcon, RemoveIcon } from '../../../common/components/icons/Icons';
+import { EditTextInput } from '../../../common/components/inputs/EditTextInput';
 import classes from './TodoTableRow.module.scss';
-import { TodoTitleInput } from './input/TodoTitleInput';
 import { useTodoViewModel } from './model/useTodoViewModel';
 
 
@@ -16,10 +16,7 @@ type Props = {
 
 export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
   const vm = useTodoViewModel();
-
-  const titleClasses = classNames(classes.title, {
-    [classes.isDone]: isDone
-  });
+  const titleClasses = classNames(classes.title, isDone && classes.isDone);
 
   return (
     <TableRow>
@@ -28,7 +25,7 @@ export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
       </TableCell>
       {vm.editableTodoId === id ? (
         <TableCell>
-          <TodoTitleInput editTodo={vm.editTodo(id)} title={title} />
+          <EditTextInput onEditComplete={vm.editTodo(id)} text={title} />
         </TableCell>
       ) : (
         <TableCell className={titleClasses} onDoubleClick={() => vm.setEditableTodo(id)}>

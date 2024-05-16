@@ -4,9 +4,9 @@ import { ListItem } from 'app/common/components/list/ListItem';
 import { ListItemIcon } from 'app/common/components/list/ListItemIcon';
 import { ListItemText } from 'app/common/components/list/ListItemText';
 import { Todo } from 'app/models/todos/Todo';
+import { IconOrButton } from '../../../common/components/buttons/IconOrButton';
+import { EditTextInput } from '../../../common/components/inputs/EditTextInput';
 import classes from './TodoListItem.module.scss';
-import { TodoButton } from './button/TodoButton';
-import { TodoTitleInput } from './input/TodoTitleInput';
 import { useTodoViewModel } from './model/useTodoViewModel';
 
 
@@ -16,16 +16,13 @@ type Props = {
 
 export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
   const vm = useTodoViewModel();
-
-  const titleClasses = classNames(classes.title, {
-    [classes.isDone]: isDone
-  });
+  const titleClasses = classNames(classes.title, isDone && classes.isDone);
 
   return (
     <ListItem className={classes.todo}>
       <ListItemIcon icon={<TodoIcon color={isDone ? 'success' : 'error'} />} />
       {vm.editableTodoId === id ? (
-        <TodoTitleInput editTodo={vm.editTodo(id)} title={title} />
+        <EditTextInput onEditComplete={vm.editTodo(id)} text={title} />
       ) : (
         <ListItemText
           className={titleClasses}
@@ -34,13 +31,13 @@ export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
         />
       )}
       <div className={classes.buttons}>
-        <TodoButton
+        <IconOrButton
           icon={<CheckIcon />}
           onClick={() => vm.toggleTodoDone(id)}
           text={isDone ? 'Mark undone' : 'Mark done'}
         />
-        <TodoButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} text="Edit" />
-        <TodoButton icon={<RemoveIcon />} onClick={() => vm.removeTodo(id)} text="Remove" />
+        <IconOrButton icon={<EditIcon />} onClick={() => vm.setEditableTodo(id)} text="Edit" />
+        <IconOrButton icon={<RemoveIcon />} onClick={() => vm.removeTodo(id)} text="Remove" />
       </div>
     </ListItem>
   );
