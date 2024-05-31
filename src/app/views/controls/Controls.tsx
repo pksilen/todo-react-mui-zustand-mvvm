@@ -8,11 +8,10 @@ import {
   ListIcon,
   TableIcon
 } from 'app/common/components/icons/Icons';
-import { Switch } from 'app/common/components/switches/Switch';
+import { Switch } from 'app/common/components/inputs/Switch';
 import { ViewMode, ViewType } from 'app/models/controls/controlsStore';
 import classes from './Controls.module.scss';
 import { useControlsViewModel } from './model/useControlsViewModel';
-
 
 export const Controls = () => {
   const vm = useControlsViewModel();
