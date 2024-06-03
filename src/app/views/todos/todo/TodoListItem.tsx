@@ -21,18 +21,18 @@ export const TodoListItem = ({ todo: { id, title, isDone } }: Props) => {
     <ListItem className={classes.todo}>
       <ListItemIcon icon={<TodoIcon color={isDone ? 'success' : 'error'} />} />
       {vm.isEditable ? (
-        <EditTextInput aria-label="Edit todo" onEditComplete={vm.editTodo(id)} text={title} />
+        <EditTextInput aria-label="Edit todo" onEditComplete={vm.edit} text={title} />
       ) : (
-        <ListItemText className={titleClasses} onDoubleClick={vm.setEditableTodo} text={title} />
+        <ListItemText className={titleClasses} onDoubleClick={vm.setAsEditable} text={title} />
       )}
       <div className={classes.buttons}>
         <IconOrButton
           icon={<CheckIcon />}
-          onClick={vm.toggleTodoDone}
+          onClick={vm.toggleDone}
           text={isDone ? 'Mark undone' : 'Mark done'}
         />
-        <IconOrButton icon={<EditIcon />} onClick={vm.setEditableTodo} text="Edit" />
-        <IconOrButton icon={<RemoveIcon />} onClick={vm.removeTodo} text="Remove" />
+        <IconOrButton icon={<EditIcon />} onClick={vm.setAsEditable} text="Edit" />
+        <IconOrButton icon={<RemoveIcon />} onClick={vm.remove} text="Remove" />
       </div>
     </ListItem>
   );

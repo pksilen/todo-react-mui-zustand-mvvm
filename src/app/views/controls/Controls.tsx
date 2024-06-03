@@ -17,13 +17,13 @@ export const Controls = () => {
   const vm = useControlsViewModel();
 
   const viewTypeButtons: IconRadioButtonProps<ViewType>[] = [
-    { icon: <ListIcon />, onClick: vm.showTodosList, value: 'list' },
-    { icon: <TableIcon />, onClick: vm.showTodosTable, value: 'table' }
+    { icon: <ListIcon />, onClick: () => vm.setViewType('list'), value: 'list' },
+    { icon: <TableIcon />, onClick: () => vm.setViewType('table'), value: 'table' }
   ];
 
   const viewModeButtons: IconRadioButtonProps<ViewMode>[] = [
-    { icon: <LightModeIcon />, onClick: vm.activateLightMode, value: 'light' },
-    { icon: <DarkModeIcon />, onClick: vm.activateDarkMode, value: 'dark' }
+    { icon: <LightModeIcon />, onClick: () => vm.setViewMode('light'), value: 'light' },
+    { icon: <DarkModeIcon />, onClick: () => vm.setViewMode('dark'), value: 'dark' }
   ];
 
   return (

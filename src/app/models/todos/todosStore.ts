@@ -3,7 +3,6 @@ import { create } from 'zustand';
 import { todoService } from 'app/services/FakeTodoService';
 import { Todo } from './Todo';
 
-
 type State = {
   editableTodoId: string | null;
   hasError: boolean;
@@ -19,7 +18,7 @@ type Actions = {
   editTodo: (id: string) => (newTitle: string) => void;
   fetchTodos: () => void;
   removeTodo: (id: string) => void;
-  setEditableTodo: (id: string | null) => void;
+  setTodoAsEditable: (id: string | null) => void;
   setTodoFilter: (text: string) => void;
   toggleShouldShowUndoneTodosOnly: () => void;
   toggleTodoDone: (id: string) => void;
@@ -68,7 +67,7 @@ export const useTodosStore = create<TodosStore>()((setState, getState) => ({
         shouldShowUndoneTodosOnly: !getState().shouldShowUndoneTodosOnly
       }),
 
-    setEditableTodo: (id: string | null) => setState({ editableTodoId: id }),
+    setTodoAsEditable: (id: string | null) => setState({ editableTodoId: id }),
     setTodoFilter: (text: string) => setState({ lowerCaseTodoFilterText: text.toLowerCase() }),
 
     toggleTodoDone: (id: string) =>

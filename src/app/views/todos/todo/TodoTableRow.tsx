@@ -20,25 +20,20 @@ export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
   return (
     <TableRow>
       <TableCell>
-        <Checkbox
-          aria-label={title}
-          isChecked={isDone}
-          color="success"
-          onChange={vm.toggleTodoDone}
-        />
+        <Checkbox aria-label={title} isChecked={isDone} color="success" onChange={vm.toggleDone} />
       </TableCell>
       {vm.isEditable ? (
         <TableCell>
-          <EditTextInput onEditComplete={vm.editTodo(id)} text={title} />
+          <EditTextInput onEditComplete={vm.edit} text={title} />
         </TableCell>
       ) : (
-        <TableCell className={titleClasses} onDoubleClick={vm.setEditableTodo}>
+        <TableCell className={titleClasses} onDoubleClick={vm.setAsEditable}>
           {title}
         </TableCell>
       )}
       <TableCell className={classes.buttons}>
-        <IconButton icon={<EditIcon />} onClick={vm.setEditableTodo} />
-        <IconButton icon={<RemoveIcon />} onClick={vm.removeTodo} />
+        <IconButton icon={<EditIcon />} onClick={vm.setAsEditable} />
+        <IconButton icon={<RemoveIcon />} onClick={vm.remove} />
       </TableCell>
     </TableRow>
   );
