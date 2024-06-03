@@ -24,7 +24,7 @@ export const TodoTableRow = ({ todo: { id, title, isDone } }: Props) => {
       </TableCell>
       {vm.isEditable ? (
         <TableCell>
-          <EditTextInput onEditComplete={vm.edit} text={title} />
+          <EditTextInput onEditComplete={vm.changeTitle} text={title} />
         </TableCell>
       ) : (
         <TableCell className={titleClasses} onDoubleClick={vm.setAsEditable}>
